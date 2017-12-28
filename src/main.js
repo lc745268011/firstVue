@@ -9,7 +9,8 @@ Vue.use(VueRouter);
 Vue.use(VueResource);
 
 // 定义组件, 也可以像教程之前教的方法从别的文件引入
-const First = { template: '<div><h2>我是第 1 个子页面</h2></div>' }
+//const First = { template: '<div><h2>我是第 1 个子页面</h2></div>' }
+import firstcomponent from './component/firstcomponent.vue'
 import secondcomponent from './component/secondcomponent.vue'
 
 // 创建一个路由器实例
@@ -19,11 +20,14 @@ const router = new VueRouter({
   base: __dirname,
   routes: [
     {
+      name:'list',
       path: '/first',
-      component: First
+      component: firstcomponent
     },
     {
-      path: '/second',
+      name:'detail',
+      //path: '/second',
+      path: '/second/:id',
       component: secondcomponent
     }
   ]

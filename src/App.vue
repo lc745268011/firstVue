@@ -11,11 +11,8 @@
       <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
     </ul>
     <h2>Ecosystem</h2>-->
-    <ul>
-      <li><router-link to="/first">测试112</router-link></li>
-      <li><router-link to="/second">测试3</router-link></li>
-    </ul>
     <router-view></router-view>
+
   </div>
 </template>
 
