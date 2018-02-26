@@ -1,18 +1,18 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from "vue-router";
-import VueResource from 'vue-resource'
+//import VueResource from 'vue-resource'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+Vue.prototype.$http = axios
+Vue.use(VueAxios, axios)
 //开启debug模式
 Vue.config.debug = true;
 
 Vue.use(VueRouter);
-Vue.use(VueResource);
-
-// 定义组件, 也可以像教程之前教的方法从别的文件引入
-//const First = { template: '<div><h2>我是第 1 个子页面</h2></div>' }
-import firstcomponent from './component/firstcomponent.vue'
-import secondcomponent from './component/secondcomponent.vue'
-
+//Vue.use(VueResource);
+import main from './component/main.vue'
 // 创建一个路由器实例
 // 并且配置路由规则
 const router = new VueRouter({
@@ -20,15 +20,20 @@ const router = new VueRouter({
   base: __dirname,
   routes: [
     {
-      name:'list',
-      path: '/first',
-      component: firstcomponent
+      name:'home',
+      path: '/',
+      component: main
     },
+    //{
+    //  name:'detail',
+    //  //path: '/second',
+    //  path: '/second/:id',
+    //  component: secondcomponent
+    //},
     {
-      name:'detail',
-      //path: '/second',
-      path: '/second/:id',
-      component: secondcomponent
+      name:'list',
+      path: '/welcome/:id',
+      component: main
     }
   ]
 })

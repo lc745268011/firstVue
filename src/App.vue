@@ -1,59 +1,33 @@
 <template>
   <div id="app">
-    <!--<firstcomponent></firstcomponent>-->
-    <!--<img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>-->
-    <router-view></router-view>
+    <lcHead></lcHead>
+    <div class="container main-container">
+      <div class="view welcome-view">
+        <lcMain></lcMain>
+        <lcAside></lcAside>
+      </div>
+    </div>
 
   </div>
 </template>
 
 <script>
-  import firstcomponent from './component/firstcomponent.vue'
+  import lcHead from './component/head.vue'
+  import lcAside from './component/aside.vue'
+  import lcMain from './component/main.vue'
 export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+
     }
   },
-  components: { firstcomponent }
+  components: {lcHead,lcAside,lcMain}
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
+  #app{
+    background: #f4f5f5;
+  }
 </style>
