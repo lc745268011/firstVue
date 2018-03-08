@@ -1,14 +1,19 @@
 <template>
-  <div data-v-2440c1eb="" data-v-02462315="" class="feed welcome__feed" data-v-3f216172="">
-    <nav data-v-1add119e="" data-v-2440c1eb="" class="category-nav"><h5 data-v-1add119e="">热门文章</h5>
+	<div data-v-2440c1eb="" data-v-02462315="" class="feed welcome__feed" data-v-3f216172="">
+		<nav data-v-1add119e="" data-v-2440c1eb="" class="category-nav">
+			<h5 data-v-1add119e="">热门文章</h5>
 
-      <div data-v-1add119e="" class="more">查看更多</div>
-      <ul data-v-1add119e="" class="nav-list">
-        <li data-v-1add119e="" class="nav-item" @click="home"><router-link :to="{name:'home'}"><span data-v-1add119e="" class="title">推荐</span></router-link></li>
-        <li data-v-1add119e="" class="nav-item" v-for="(n,index) in navs"><router-link :to="{name:'list',params:{id:n.nav}}"><span data-v-1add119e="" class="title">{{n.name}}</span></router-link></li>
-      </ul>
-    </nav>
-    <ul data-v-f0edcf22="" data-v-2440c1eb="" st:block="entryList" class="entry-list"><!---->
+			<div data-v-1add119e="" class="more">查看更多</div>
+			<ul data-v-1add119e="" class="nav-list">
+				<li data-v-1add119e="" class="nav-item" @click="home1(name)" :class="{active: activeName == ''}">
+					<router-link :to="{name:'home'}"><span data-v-1add119e="" class="title">{{name}}</span></router-link>
+				</li>
+				<li data-v-1add119e="" class="nav-item" v-for="(n,index) in navs" @click="home()" :class="{active: activeName  == n.nav}">
+					<router-link :to="{name:'list',params:{id:n.nav}}"><span data-v-1add119e="" class="title">{{n.name}}</span></router-link>
+				</li>
+			</ul>
+		</nav>
+		 <ul data-v-f0edcf22="" data-v-2440c1eb="" st:block="entryList" class="entry-list" v-if="status==1"><!---->
       <li data-v-f0edcf22="" class="item" v-for="l in lists">
         <div data-v-9f3d7718="" data-v-f0edcf22="" class="entry-box">
           <div data-v-6b46a625="" data-v-9f3d7718="" st:block="entry" st:state="5a936ca65188257a63113170|1"
@@ -80,53 +85,132 @@
         </div>
       </li>
       <!----></ul>
-  </div>
+		<ul data-v-f0edcf22="" data-v-2440c1eb="" st:block="entryList" class="entry-list" v-if="status==0">
+			<li data-v-86c0651c="" class="item" v-for="ll in aaLists">
+				<div data-v-f2ca14b0="" data-v-86c0651c="" st:block="entry" st:state="58d1df2f570c350058b918a2" class="entry">
+					<a data-v-f2ca14b0="" href="/post/58d1dcd5a22b9d006443c5d5" target="_blank" rel="" st:name="link" class="entry-link">
+						<div data-v-f2ca14b0="" class="content-box">
+							<div data-v-f2ca14b0="" class="info-box">
+								<div data-v-f2ca14b0="" class="info-row title-row">
+									<a data-v-f2ca14b0="" href="/post/58d1dcd5a22b9d006443c5d5" target="_blank" rel="" st:name="title" class="title">{{ll.title}}</a>
+								</div>
+								<div data-v-f2ca14b0="" class="info-row meta-row">
+									<ul data-v-f2ca14b0="" class="meta-list">
+										<li data-v-f2ca14b0="" class="item category"><span data-v-f2ca14b0="" class="category-title frontend">{{ll.category.name}}</span></li>
+										<li data-v-f2ca14b0="" class="item username clickable">
+											<div data-v-311d2efa="" data-v-f2ca14b0="" st:block="userPopover" st:state="578e6f3c0a2b580068609665" class="user-popover-box">
+												<!---->
+												<a data-v-f2ca14b0="" href="/user/578e6f3c0a2b580068609665" target="_blank" rel="" st:name="user" st:state="578e6f3c0a2b580068609665" data-v-311d2efa="">{{ll.user.username}}</a>
+											</div>
+										</li>
+										<li data-v-f2ca14b0="" class="item">11月前</li>
+										<li data-v-f2ca14b0="" class="item">{{ll.viewsCount}}次阅读</li>
+									</ul>
+								</div>
+							</div>
+							<div data-v-b2db8566="" data-v-009ea7bb="" data-v-f2ca14b0="" data-src="ll.screenshot" class="lazy thumb thumb loaded" style="background-image: url(&quot;https://dn-mhke0kuv.qbox.me/7366c685c2720899b02d.jpg?imageView2/1/w/120/h/120/q/85/format/webp/interlace/1&quot;); background-size: cover;"></div>
+						</div>
+					</a>
+				</div>
+			</li>
+		</ul>
+	</div>
 </template>
+<style>
+	.active a {
+    color: #007fff;
+}
+</style>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
-  export default {
-    data ()
-  {
-    return {
-      navs:[{
-        name:'前端',
-        nav:'frontend'
-      },{
-        name:'Android',
-        nav:'android'
-      },{
-        name:'后端',
-        nav:'backend'
-      },{
-        name:'人工智能',
-        nav:'ai'
-      },{
-        name:'iOS',
-        nav:'ios'
-      },{
-        name:'工具资源',
-        nav:'freebie'
-      },{
-        name:'阅读',
-        nav:'article'
-      }],
-      lists:[],
-      tags:[]
-    }
-  },
-  created:function(){
-  },
-  methods:{
-    home(){
-      this.$http.get('/api/aaa.json').then(response => {
-        // success callback
-      this.lists=response.data.d.entrylist;
-      }, response => {
-        // error callback
-      })
-
-  }
-  },
-  }
+	export default {
+		data() {
+			return {
+				name:'推荐',
+				nav:'index',
+				navs: [{
+					name: '前端',
+					nav: 'frontend'
+				}, {
+					name: 'Android',
+					nav: 'android'
+				}, {
+					name: '后端',
+					nav: 'backend'
+				}, {
+					name: '人工智能',
+					nav: 'ai'
+				}, {
+					name: 'iOS',
+					nav: 'ios'
+				}, {
+					name: '工具资源',
+					nav: 'freebie'
+				}, {
+					name: '阅读',
+					nav: 'article'
+				}],
+				status:0,
+				lists: [],
+				tags: [],
+				aaLists: [],
+				activeName:''
+			}
+		},
+		created: function() {
+			this.$http.get('/api/bbb.json').then(response => {
+				// success callback
+				this.aaLists = response.data.d;
+			}, response => {
+				// error callback
+			})
+			var page = 1;
+			window.onscroll = function () {
+			        
+			};
+		},
+		methods: {
+			home() {
+				this.$http.get('/api/aaa.json').then(response => {
+					// success callback
+					this.lists = response.data.d.entrylist;
+				}, response => {
+					// error callback
+				})
+				this.status = 1;
+				this.activeName=this.$route.params.id;
+			},
+			home1() {
+				this.$http.get('/api/bbb.json').then(response => {
+					// success callback
+					this.aaLists = response.data.d;
+				}, response => {
+					// error callback
+				})
+				this.status = 0;
+				this.activeName='';
+			},
+			menu(){
+				var marginBot = 0;
+			        if (document.documentElement.scrollTop) {
+			            marginBot = document.documentElement.scrollHeight - (document.documentElement.scrollTop + document.body.scrollTop) - document.documentElement.clientHeight;
+			        } else {
+			            marginBot = document.body.scrollHeight - document.body.scrollTop - document.body.clientHeight;
+			        }
+			        if (marginBot <= 10) {
+			            this.$http.get('/api/aaa.json').then(response => {
+									// success callback
+									this.lists.push(response.data.d.entrylist);
+//									page = page + 1;
+							}, response => {
+							// error callback
+							})
+							this.status = 1;this.activeName=this.$route.params.id;
+			        }
+			},
+		},
+		mounted(){
+			window.addEventListener('scroll', this.menu)
+		}
+	}
 </script>
-

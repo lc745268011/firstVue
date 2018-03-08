@@ -1,4 +1,6 @@
 import Vue from 'vue'
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 import App from './App.vue'
 import VueRouter from "vue-router";
 //import VueResource from 'vue-resource'
@@ -7,6 +9,7 @@ import VueAxios from 'vue-axios'
 
 Vue.prototype.$http = axios
 Vue.use(VueAxios, axios)
+Vue.use(ElementUI);
 //开启debug模式
 Vue.config.debug = true;
 

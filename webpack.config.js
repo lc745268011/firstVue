@@ -36,7 +36,11 @@ module.exports = {
         options: {
           name: '[name].[ext]?[hash]'
         }
-      }
+      },
+      {
+				test: /\.(eot|woff|woff2|ttf)([\\?]?.*)$/,
+				loader: "file-loader"
+			}
     ]
   },
   resolve: {

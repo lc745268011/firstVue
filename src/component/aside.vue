@@ -10,19 +10,19 @@
       </div>
       <div data-v-c1cc7ad0="" class="input-group">
         <div data-v-c1cc7ad0="" class="input-box">
-          <input data-v-c1cc7ad0="" name="registerUsername" maxlength="20" placeholder="昵称" class="input"/>
+          <input data-v-c1cc7ad0="" name="registerUsername" maxlength="20" placeholder="昵称" class="input" id="name" v-model="name"/>
         </div>
         <div data-v-c1cc7ad0="" class="input-box">
-          <input data-v-c1cc7ad0="" name="registerPhoneOrEmail1" maxlength="64" placeholder="邮箱 / 手机" class="input"/>
+          <input data-v-c1cc7ad0="" name="registerPhoneOrEmail1" maxlength="64" placeholder="邮箱 / 手机" class="input" id="phone" v-model="phone"/>
         </div>
         <!---->
         <!---->
         <div data-v-c1cc7ad0="" class="input-box">
           <input data-v-c1cc7ad0="" name="registerPassword" type="password" maxlength="64" autocomplete="new-password"
-                 placeholder="密码（不少于 6 位）" class="input"/>
+                 placeholder="密码（不少于 6 位）" class="input" id="password1" v-model="password1"/>
         </div>
       </div>
-      <button data-v-c1cc7ad0="" st:name="registerBtn" class="btn submit-btn">立即注册</button>
+      <button data-v-c1cc7ad0="" st:name="registerBtn" class="btn submit-btn" @click="register">立即注册</button>
       <div data-v-c1cc7ad0="" class="oauth-box">
         第三方登录：
         <img data-v-c1cc7ad0="" st:name="oauthBtn" st:state="weibo" title="微博" alt="微博"
@@ -211,7 +211,21 @@
   export default {
     data ()
   {
-    return {}
+    return {
+    	name:'',
+    	phone:'',
+    	password1:''
+    }
+  },
+  methods:{
+  	register(){
+  		if(this.name==""||this.phone==""||this.password1==""){
+        this.$notify.error({
+           title: '错误',
+          message: '请完整填写各项！'
+        });
+  		}
+  	}
   }
   }
 </script>

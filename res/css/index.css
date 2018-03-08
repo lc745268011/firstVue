@@ -568,7 +568,7 @@ li {
 }
 
 .button:hover, button:hover {
-  background-color: #0371df;
+  /*background-color: #0371df;*/
   color: #fff
 }
 
